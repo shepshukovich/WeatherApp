@@ -58,4 +58,4 @@ gulp.task('connectServer', function() {
 });
 
 
-gulp.task('dev', gulp.parallel( 'html:watch', 'sass:watch', 'js:watch', 'connectServer' ));
+gulp.task('default', gulp.parallel( 'html:watch', 'sass:watch', 'js:watch', 'connectServer' ));

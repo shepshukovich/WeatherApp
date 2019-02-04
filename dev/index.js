@@ -20,8 +20,15 @@ $(window).on('load', function() {
     const listOfMatchedCities = $('.matching-options');
     const weatherForm = $('form');
     const ul = $('.matching-options');
+    const weatherData = $('.weatherData');
+    const temperatureOutside = $('.temperature-outside');
+    const weatherSummaryCurrently = $('.weather-summary-currently');
+    const weatherSummaryDaily = $('.weather-summary-daily');
+    const location = $('.location');
     let windowSize = $(window).height();
     let newWindowSize = windowSize / 20;
+    let newWindowSizeHalf = windowSize / 50;
+    let newWindowSizeBottom = windowSize - newWindowSize;
 
     const matchingOptions = (amount) => {
         listOfMatchedCities.empty();
@@ -36,7 +43,20 @@ $(window).on('load', function() {
                 searchField[0].value = `${amount[i].adminArea5 || amount[i].adminArea4},${amount[i].adminArea3 != '' ? amount[i].adminArea3 : ''} ${amount[i].adminArea1}`;
                 localStorage['lastSearch'] = `${amount[i].adminArea5 || amount[i].adminArea4 || amount[i].adminArea3},${amount[i].adminArea3 != '' ? amount[i].adminArea3 : ''} ${amount[i].adminArea1}`;
                 listOfMatchedCities.empty();
-                getWeather(amount[i].latLng).then(w => console.log(w));
+                getWeather(amount[i].latLng).then(w => {
+                    console.log(w);
+                    location[0].innerHTML = `${searchField[0].value}`;
+                    temperatureOutside[0].innerHTML = `${w.currently.temperature} ℃`;
+                    weatherSummaryCurrently[0].innerHTML = `Сегодня ${w.currently.summary}`;
+                    weatherSummaryDaily[0].innerHTML = `${w.daily.summary}`;
+
+                    weatherData.css({
+                        'opacity': '1',
+                        'top': '55%',
+                        'left': '50%',
+                        'transform': 'translate(-50%, -50%)'
+                    });
+                });
 
                
                     $('.landing').css({
@@ -45,6 +65,10 @@ $(window).on('load', function() {
                         'left': '50%',
                         'transform': `translate(-50%, ${newWindowSize}px)`
                     });
+
+                    
+
+                    
 
                     setTimeout(() => { ul.css({ 'min-height': '0' }) }, 1000);
             });
@@ -55,9 +79,13 @@ $(window).on('load', function() {
         if(response.results[0].locations.length > 1) {
             $('.landing').css({
                 'box-shadow':'inset 0 0 10px #000000',
-                'top': '50%',
+                // 'top': '50%',
+                // 'left': '50%',
+                // 'transform': 'translate(-50%, -50%)'
+                // 'box-shadow':'none',
+                'top': '5%',
                 'left': '50%',
-                'transform': 'translate(-50%, -50%)'
+                'transform': `translate(-50%, ${newWindowSize}px)`
             });
             matchingOptions(response.results[0].locations);
             weatherForm.css({
@@ -67,7 +95,13 @@ $(window).on('load', function() {
         }
         else if(response.results[0].locations.length == 1) {
             listOfMatchedCities.empty();
-            getWeather(response.results[0].locations[0].latLng).then(w => console.log(w));
+            getWeather(response.results[0].locations[0].latLng).then(w => {
+                console.log(w);
+                location[0].innerHTML = `${searchField[0].value}`;
+                temperatureOutside[0].innerHTML = `${w.currently.temperature} ℃`;
+                weatherSummaryCurrently[0].innerHTML = `Сегодня ${w.currently.summary}`;
+                weatherSummaryDaily[0].innerHTML = `${w.daily.summary}`;
+            });
 
             $('.landing').css({
                 'box-shadow':'none',
@@ -75,9 +109,17 @@ $(window).on('load', function() {
                 'left': '50%',
                 'transform': `translate(-50%, ${newWindowSize}px)`
             });
-            weatherForm.css({
-                'transform': `translate(-50%, -50%)`
-            });
+            // weatherForm.css({
+            //     'transform': `translate(-50%, -50%)`
+            // });
+            setTimeout(function() {
+                weatherData.css({
+                    'top': '55%',
+                    'left': '50%',
+                    'transform': 'translate(-50%, -50%)'
+                });
+            }, 300);
+            
         }
     };
     
@@ -114,6 +156,17 @@ $(window).on('load', function() {
     searchField.on('keyup', function() {
         checkPrevValue();
 
+        // weatherData.css({
+        //     'opacity': '0',
+        //     'top': '150%'
+        // });
+
+        weatherData.css({
+            'opacity': '0',
+            'top': '150%',
+            'left': '50%',
+            'transform': 'translate(-50%, -50%)'
+        });
         Promise.resolve(getLatLng(this.value).then(response => {
             showListOrSingleValue(response);
         })).then(() => {
@@ -123,6 +176,8 @@ $(window).on('load', function() {
         });
         
         localStorage['lastSearch'] = this.value;
+
+        
     });
 
     weatherForm.on('mouseover', function() {

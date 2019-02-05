@@ -14,13 +14,16 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.js"></script>
     <script src="./index.js"></script>
+    
+    <!-- <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.css"/> -->
 </head>
 <body id="root">
     <section class="landing-wrapper">
         <div class="container landing">
             <form action="" class="form">
-                <input type="text" class="location-picker" placeholder="Введите город">
+                <input type="search" id="location-picker" placeholder="Введите город" />
                 <i class="fa fa-search search-button"></i>
             </form>
             <div class="matching-options-wrapper">

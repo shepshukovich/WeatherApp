@@ -114,8 +114,7 @@ form {
   background: white;
   box-sizing: border-box;
   border-radius: 25px;
-  border: 4px solid white;
-  padding: 5px; }
+  border: 4px solid white; }
 
 input {
   position: absolute;
@@ -190,3 +189,106 @@ form:hover .fa {
 
 .weather-summary-currently {
   padding-bottom: 15px; }
+
+.mq-input, .mq-place-search {
+  width: 100%; }
+
+.mq-input {
+  line-height: 50px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  outline: none;
+  box-sizing: border-box;
+  border-radius: 4px;
+  background-color: transparent;
+  padding-right: 35px;
+  padding-left: 15px;
+  height: 42px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+.mq-input::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+.mq-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: none; }
+
+.mq-input::-ms-clear {
+  display: none; }
+
+.mq-input-icon {
+  border: 0;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 16px;
+  outline: none; }
+
+.mq-input-icon svg {
+  fill: #cfcfcf;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.mq-dropdown-menu {
+  width: 100%;
+  background: transparent;
+  box-shadow: inset 0 0 10px #000000;
+  border-radius: 25px 25px 50px 50px;
+  margin-top: 20px;
+  overflow: hidden; }
+
+.mq-result {
+  cursor: pointer;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 18px;
+  overflow: hidden;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 600;
+  font-size: 24px; }
+
+.mq-result:hover {
+  background: -webkit-gradient(linear, left top, right top, from(#ff8a00), to(#da1b60));
+  background: linear-gradient(to right, #ff8a00, #da1b60);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  text-shadow: none; }
+
+.mq-result .mq-name {
+  color: #333; }
+
+.mq-result .mq-address {
+  font-size: smaller;
+  margin-left: 12px;
+  color: white; }
+
+.mq-result-icon {
+  margin-right: 10px;
+  width: 14px;
+  height: 20px;
+  vertical-align: middle; }
+
+.mq-result-icon svg {
+  -webkit-transform: scale(0.9) translateY(2px);
+  transform: scale(0.9) translateY(2px);
+  fill: #666; }
+
+.mq-cursor .mq-result-icon svg {
+  -webkit-transform: scale(1) translateY(2px);
+  transform: scale(1) translateY(2px);
+  fill: #333; }
+
+.mq-icon-clear {
+  display: none;
+  cursor: pointer; }

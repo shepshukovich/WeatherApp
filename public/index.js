@@ -9,7 +9,9 @@ async function getWeather(c) {
 ;
 
 async function getLatLng(location) {
-  const url = `http://www.mapquestapi.com/geocoding/v1/address?key=3AUyiQEW6Jf0o0Q3voZHdjkwiLavPUoc&location=${location}`;
+  // const url = `http://www.mapquestapi.com/geocoding/v1/address?key=3AUyiQEW6Jf0o0Q3voZHdjkwiLavPUoc&location=${location}`; //vgoilik@gmail.com key
+  const url = `http://www.mapquestapi.com/geocoding/v1/address?key=cxvpn9HcGzk6ltzBBAgPInW12A3kPFuM&location=${location}`; //vshepshuk@gmail.com key
+
   const response = await axios.get(url);
   return response.data;
 }

@@ -35,7 +35,5 @@
     "gulp-connect": "^5.7.0",
     "regenerator-runtime": "^0.13.1"
   },
-  "dependencies": {
-    
-  }
+  "dependencies": {}
 }

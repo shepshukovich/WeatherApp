@@ -1,9 +1,13 @@
 async function getWeather(coordinates) {
-    const url = `https://api.darksky.net/forecast/363929461c32fc7192449bdfe241bf78/${coordinates.lat},${coordinates.lng}?units=si&lang=ru`;
+    const url = `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/363929461c32fc7192449bdfe241bf78/${coordinates.lat},${coordinates.lng}?units=si&lang=ru`;
     const response = await axios.get(url);
+    console.log("respone weather", response);
     
     return response.data;
 };
+
+`https://api.darksky.net/forecast/363929461c32fc7192449bdfe241bf78/53.902253,27.561863?units=si&lang=ru`
+
 async function getLatLng(location) {
     // const url = `http://www.mapquestapi.com/geocoding/v1/address?key=3AUyiQEW6Jf0o0Q3voZHdjkwiLavPUoc&location=${location}`; //vgoilik@gmail.com key
     const url = `http://www.mapquestapi.com/geocoding/v1/address?key=cxvpn9HcGzk6ltzBBAgPInW12A3kPFuM&location=${location}`; //vshepshuk@gmail.com key
@@ -20,11 +24,11 @@ $(window).on('load', function() {
 
     async function showWeather(resp) {
         let response;
-        resp.result === undefined ? response = resp.results[0].locations[0].latLng : f => f;
+        resp.result === undefined ? response = resp.results[0].locations[0].displayLatLng : f => f;
         resp.results === undefined ? response = resp.result.latlng : f => f;
     
         getWeather(response).then((w) => {
-            temperatureOutside[0].innerHTML = `${w.currently.temperature} ℃`;
+            temperatureOutside[0].innerHTML = `${w.currently.temperature} °C`;
             weatherSummaryCurrently[0].innerHTML = `Сегодня ${w.currently.summary}`;
             weatherSummaryDaily[0].innerHTML = `${w.daily.summary}`;
 
@@ -50,6 +54,7 @@ $(window).on('load', function() {
       });
 
       getLatLng(localStorage['lastSearch']).then((w) => {
+          console.log(w);
           showWeather(w); //w.results[0].locations[0].latLng
       });
       

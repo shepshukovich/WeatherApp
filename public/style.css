@@ -50,6 +50,52 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+.mapping {
+  position: absolute; }
+
+.intro {
+  padding: 30px;
+  color: white;
+  font-family: 'Rubik', sans-serif;
+  display: block;
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all .9999s; }
+
+.intro__hide {
+  opacity: 0 !important;
+  top: 0 !important; }
+
+.mapboxgl-ctrl-geocoder input[type='text'] {
+  display: block;
+  background-color: white !important;
+  box-shadow: 0 0 10px #000000 !important;
+  padding: 10px 10px 10px 10px !important; }
+
+.mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-geocoder ul {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.1) !important; }
+
+.mapboxgl-ctrl-top-right {
+  top: 35%;
+  right: 50%;
+  transform: translate(50%, 50%);
+  transition: top 1s, left 1s, transform 1s; }
+
+.mapboxgl-ctrl-top-right__very-top {
+  top: 1% !important; }
+
+.suggestions {
+  margin-top: 45px !important;
+  border-radius: 20px !important; }
+
 .matching-options-wrapper {
   transition: all 1s; }
 
@@ -84,7 +130,8 @@ table {
 
 .container {
   width: 1030px;
-  height: auto; }
+  height: auto;
+  display: none; }
 
 .landing-wrapper {
   position: absolute;
@@ -92,7 +139,10 @@ table {
   height: 100%;
   background: plum;
   background: linear-gradient(45deg, plum 25%, #3ca2c8 75%);
-  transition: all 1s; }
+  transition: all 1.5s, height .4s; }
+
+.landing-wrapper__height-0 {
+  height: 0 !important; }
 
 .landing {
   position: relative;
@@ -134,8 +184,7 @@ input {
 
 a {
   color: black;
-  font-family: 'Roboto', sans-serif;
-  font-size: 30px; }
+  font-family: 'Roboto', sans-serif; }
 
 .fa {
   box-sizing: border-box;
@@ -175,20 +224,47 @@ form:hover .fa {
   font-family: 'Rubik', sans-serif;
   transition: top 1s, opacity .5s; }
 
+.weatherData__hide {
+  opacity: 1 !important;
+  top: 70% !important;
+  transform: translate(-50%, -50%) !important; }
+
 .location {
   display: block;
   font-weight: 700;
   font-size: 100px; }
+
+.location {
+  font-size: 30px;
+  text-shadow: #808080 1px 0 10px; }
 
 .temperature-outside {
   display: block; }
 
 .temperature-outside {
   font-weight: 700;
-  font-size: 200px; }
+  font-size: 200px;
+  text-shadow: #808080 1px 0 30px; }
+
+.temperature-outside__text-shadow {
+  text-shadow: #000000 1px 0 10px; }
 
 .weather-summary-currently {
-  padding-bottom: 15px; }
+  padding-bottom: 15px;
+  text-shadow: #FC0 1px 0 10px; }
+
+.weather-summary-daily {
+  text-shadow: #FC0 1px 0 10px; }
+
+.location, .temperature-outside, .weather-summary-currently, .weather-summary-daily {
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */ }
 
 .mq-input, .mq-place-search {
   width: 100%; }

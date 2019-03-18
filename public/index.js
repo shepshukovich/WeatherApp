@@ -25,7 +25,7 @@ $(window).on('load', function () {
 
   async function showWeather(resp) {
     let response;
-    resp.result === undefined ? response = resp.results[0].locations[0].displayLatLng : f => f;
+    resp.result === undefined ? response = resp.results.locations.displayLatLng : f => f;
     resp.results === undefined ? response = resp.result.latlng : f => f;
     getWeather(response).then(w => {
       temperatureOutside[0].innerHTML = `${w.currently.temperature} °C`;
@@ -47,10 +47,10 @@ $(window).on('load', function () {
     key: 'cxvpn9HcGzk6ltzBBAgPInW12A3kPFuM',
     container: $('#location-picker')[0],
     collection: ['adminArea', 'address', 'airport', 'category', 'franchise', 'poi'],
-    limit: 15,
+    limit: 6,
     //default: 5, max: 15
     style: true,
-    useDeviceLocation: false
+    useDeviceLocation: true
   });
   searchAPI.on('change', function (e) {
     showWeather(e).then(w => {
@@ -86,6 +86,8 @@ $(window).on('load', function () {
   //   getWeather(localStorage['lastSearch']).then(w => console.log(w))
   // let cache = localStorage['lastSearch'];
 
+  const search = $('.mapboxgl-ctrl-geocoder input[type="text"]');
+  const searchLiActive = $('ul[class="suggestions"] li a');
   const listOfMatchedCities = $('.matching-options');
   const weatherForm = $('form');
   const ul = $('.matching-options');
@@ -97,6 +99,68 @@ $(window).on('load', function () {
   // let newWindowSize = windowSize / 20;
   // let newWindowSizeHalf = windowSize / 50;
   // let newWindowSizeBottom = windowSize - newWindowSize;
+
+  var res = '';
+  search.on('change', function () {
+    setTimeout(function () {
+      if (res == $('.mapboxgl-ctrl-geocoder input[type="text"]').val()) {
+        f => f;
+      } else {
+        res = $('.mapboxgl-ctrl-geocoder input[type="text"]').val();
+        getLatLng(res).then(w => {
+          getWeather(map._easeOptions.center).then(w => {
+            $('.location')[0].innerHTML = `${res}`;
+            temperatureOutside[0].innerHTML = `${w.currently.temperature} °C`;
+            weatherSummaryCurrently[0].innerHTML = `Сегодня ${w.currently.summary}`;
+            weatherSummaryDaily[0].innerHTML = `${w.daily.summary}`;
+            weatherData.css({
+              'opacity': '1',
+              'top': '69%',
+              'transform': 'translate(-50%, -50%)' // 'box-shadow': 'grey 0px 45px 40px',
+              // 'background-color': 'rgb(128,128,128, .004)'
+
+            });
+            $('.temperature-outside').css({
+              'text-shadow': '#000000 1px 0 10px;'
+            });
+            $('.mapboxgl-ctrl-top-right').css({
+              'top': '1%'
+            });
+            $('.landing-wrapper').css({
+              'height': '0'
+            });
+            $('.intro').css({
+              'opacity': '0',
+              'top': '0'
+            }); // weatherData.toggleClass('weatherData__hide');
+            // $('.mapboxgl-ctrl-top-right').toggleClass('mapboxgl-ctrl-top-right__very-top');
+            // $('.landing-wrapper').toggleClass('landing-wrapper__height-0');
+            // $('.intro').toggleClass('intro__hide');
+          });
+        });
+      }
+    }, 500);
+  });
+  search.on('keyup', function () {
+    weatherData.css({
+      'opacity': '1',
+      'top': '170%',
+      'transform': 'translate(-50%, -50%)'
+    });
+    $('.landing-wrapper').css({
+      'height': '100%'
+    });
+    $('.mapboxgl-ctrl-top-right').css({
+      'top': '35%'
+    });
+    $('.suggestions').css({
+      'box-shadow': '0 0 10px #000000 !important'
+    });
+    $('.intro').css({
+      'opacity': '1',
+      'top': '33%'
+    });
+  });
 
   const matchingOptions = amount => {
     listOfMatchedCities.empty();

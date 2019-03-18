@@ -47,16 +47,20 @@ $(window).on('load', function() {
     const searchAPI = placeSearch({
         key: 'cxvpn9HcGzk6ltzBBAgPInW12A3kPFuM',
         container: $('#location-picker')[0],
+        collection : ['adminArea', 'address', 'airport', 'category', 'franchise', 'poi'],
+        limit: 15, //default: 5, max: 15
+        style: true,
+        useDeviceLocation: false
       });
 
       searchAPI.on('change', function(e) {
         showWeather(e).then(w => {localStorage['lastSearch'] = searchAPI.getVal()});
       });
 
-      getLatLng(localStorage['lastSearch']).then((w) => {
-          console.log(w);
-          showWeather(w); //w.results[0].locations[0].latLng
-      });
+    //   getLatLng(localStorage['lastSearch']).then((w) => {
+    //       console.log(w);
+    //       showWeather(w); //w.results[0].locations[0].latLng
+    //   });
       
       searchAPI.setVal(localStorage['lastSearch']);
       

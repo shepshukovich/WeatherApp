@@ -14,16 +14,13 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/shepshuk/weatherapp#readme",
   "devDependencies": {
-    "gulp": "^4.0.0",
-    "gulp-sass": "^4.0.2",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/runtime": "^7.3.1",
-    "babel-runtime": "^5.3.0",
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-regenerator": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
+    "@babel/runtime": "^7.3.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -31,11 +28,13 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "babel-runtime": "^5.3.0",
+    "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0-beta.2",
     "gulp-connect": "^5.7.0",
+    "gulp-sass": "^4.0.2",
+    "mapbox-gl": "^0.53.1",
     "regenerator-runtime": "^0.13.1"
   },
-  "dependencies": {
-    
-  }
+  "dependencies": {}
 }

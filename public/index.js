@@ -7,15 +7,6 @@ async function getWeather(coordinates) {
 }
 
 ;
-
-async function getLatLng(location) {
-  const url = `http://www.mapquestapi.com/geocoding/v1/address?key=cxvpn9HcGzk6ltzBBAgPInW12A3kPFuM&location=${location}`; //vshepshuk@gmail.com key, vgoilk@gmail.com key is ?key=3AUyiQEW6Jf0o0Q3voZHdjkwiLavPUoc&
-
-  const response = await axios.get(url);
-  return response.data;
-}
-
-;
 $(window).on('load', () => {
   const searchInput = $('.mapboxgl-ctrl-geocoder input[type="text"]');
   const weatherData = $('.weatherData');
@@ -35,18 +26,16 @@ $(window).on('load', () => {
         f => f;
       } else {
         res = searchInput.val();
-        getLatLng(res).then(() => {
-          getWeather(map._easeOptions.center).then(data => {
-            location.html(`${res}`);
-            temperatureOutside.html(`${data.currently.temperature < 0 ? data.currently.temperature : '+' + data.currently.temperature} °C`);
-            weatherSummaryOutside.html(`Сегодня ${data.currently.summary}`);
-            weatherSummaryDaily.html(`${data.daily.summary}`);
-            weatherData.addClass('weatherData__hide');
-            mapboxglCtrlTopRight.addClass('mapboxgl-ctrl-top-right__very-top');
-            landingWrapper.addClass('landing-wrapper__height-0');
-            intro.addClass('intro__hide-at-top');
-            loadingLines.removeClass('loading-lines__display-block');
-          });
+        getWeather(map._easeOptions.center).then(data => {
+          location.html(`${res}`);
+          temperatureOutside.html(`${data.currently.temperature < 0 ? data.currently.temperature : '+' + data.currently.temperature} °C`);
+          weatherSummaryOutside.html(`Сегодня ${data.currently.summary}`);
+          weatherSummaryDaily.html(`${data.daily.summary}`);
+          weatherData.addClass('weatherData__hide');
+          mapboxglCtrlTopRight.addClass('mapboxgl-ctrl-top-right__very-top');
+          landingWrapper.addClass('landing-wrapper__height-0');
+          intro.addClass('intro__hide-at-top');
+          loadingLines.removeClass('loading-lines__display-block');
         });
       }
     }, 500);
